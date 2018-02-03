@@ -1,12 +1,19 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <v-app id="app">
+    <v-content>
+      <router-view/>
+    </v-content>
+    <page-footer></page-footer>
+  </v-app>
 </template>
 
 <script>
+  import PageFooter from './components/fragments/footer'
   export default {
-    name: 'App'
+    name: 'App',
+    components: {
+      PageFooter
+    }
   }
 </script>
 

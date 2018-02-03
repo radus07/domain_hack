@@ -1,8 +1,9 @@
 <template>
-  <div>
-    <h2>Web</h2>
-    <router-view/>
-  </div>
+  <section class="web-section">
+    <div>
+      <router-view/>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -10,3 +11,18 @@ export default {
   name: 'Web'
 }
 </script>
+
+<style lang="scss" scoped>
+  .web-section  {
+    width: 100%;
+    height: 100%;
+    background: url("../../static/img/backgroud.jpg") center;
+    background-size: cover;
+
+    > div {
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.56);
+      display: flex;
+    }
+  }
+</style>
