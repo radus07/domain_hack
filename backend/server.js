@@ -13,6 +13,8 @@ app.use((req, res, next) => {
   next()
 })
 
+require('./routes')(app)
+
 http.createServer(app).listen(8083, () => {
   console.log('Server started')
 })
