@@ -6,9 +6,10 @@
           <v-flex xs8>
             <v-text-field
               label="Input text here..."
-              :counter="100"
-              maxLength="100"
+              :counter="75"
+              maxLength="75"
               v-model="text"
+              v-on:input="getDomains ()"
             ></v-text-field>
           </v-flex>
         </v-layout>
@@ -21,12 +22,12 @@
               <b>Country</b>
             </v-flex>
           </v-layout>
-          <v-layout>
+          <v-layout v-for="domain in domains" v-bind:key="domain._id">
             <v-flex xs6>
-              xxx.xxx.xx/
+              {{(domain.name) ? domain.name : 'xxx'}}.<b>{{domain.tld}}</b>/<i>{{domain.path}}</i>
             </v-flex>
             <v-flex xs6>
-              Name
+              {{domain.country}}
             </v-flex>
           </v-layout>
         </div>
@@ -39,11 +40,22 @@
 </template>
 
 <script>
+  import {tldsService} from '@/api/tlds'
   export default {
     name: 'Home',
     data () {
       return {
-        text: null
+        text: null,
+        domains: []
+      }
+    },
+    methods: {
+      getDomains () {
+        this.text = this.text.replace(/[^A-Z0-9-]+/ig, '')
+        tldsService.getDomains(this.text)
+          .then(response => {
+            this.domains = response
+          })
       }
     }
   }
