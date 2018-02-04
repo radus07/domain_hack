@@ -30,7 +30,7 @@ defaultUser.save((err) => {
 })
 
 // read tlds from json
-const data = JSON.parse(fs.readFileSync('./tld.json', 'utf8'))
+const data = JSON.parse(fs.readFileSync('backend/init/tld.json', 'utf8'))
 // insert all tlds into db
 data.forEach(item => {
   const tld = new TLD({country: item.country_name, tld: item.tld})
