@@ -11,6 +11,12 @@ module.exports = (app) => {
       else res.json({status: 200, data: result})
     })
   })
+  app.get('/api/users/:id', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, result) => {
+      if (err || !result) res.json({status: 404})
+      else res.json({status: 200})
+    })
+  })
   app.post('/api/users', (req, res) => {
     const user = new User({
       username: req.body.username,
