@@ -29,6 +29,19 @@
     width: 100%;
     height: 100%;
     overflow-y: hidden;
+
+    #app {
+      height: 100%;
+      overflow-y: hidden;
+
+      .content--wrap {
+        height: calc(100% - 36px);
+
+        .content {
+          overflow-y: auto;
+        }
+      }
+    }
   }
 
 </style>

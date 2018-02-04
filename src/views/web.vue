@@ -16,6 +16,7 @@ export default {
   .web-section  {
     width: 100%;
     height: 100%;
+    min-height: 500px;
     background: url("../../static/img/backgroud.jpg") center;
     background-size: cover;
 
