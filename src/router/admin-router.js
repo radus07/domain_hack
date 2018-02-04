@@ -1,5 +1,6 @@
 import Admin from '@/views/admin'
 import Home from '@/components/admin/home/home'
+import Users from '@/components/admin/users/users'
 
 const adminRoutes = [
   {
@@ -11,6 +12,11 @@ const adminRoutes = [
         path: 'home',
         name: 'admin.home',
         component: Home
+      },
+      {
+        path: 'users',
+        name: 'admin.users',
+        component: Users
       }
     ]
   }
