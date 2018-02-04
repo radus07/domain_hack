@@ -46,7 +46,7 @@
             <v-btn flat @click="text='arialius'; getDomains()">arialius</v-btn>
             <v-btn flat @click="text='mucuses'; getDomains()">mucuses</v-btn>.
           </h3>
-          <v-btn class="mt-5" style="width: 200px;" round>sign in</v-btn>
+          <v-btn class="mt-5" style="width: 200px;" round :to="{name: 'web.sign_in'}">sign in</v-btn>
         </div>
       </v-flex>
     </v-layout>
