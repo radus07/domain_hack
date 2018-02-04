@@ -9,7 +9,7 @@
               :counter="75"
               maxLength="75"
               v-model="text"
-              v-on:input="getDomains ()"
+              v-on:input="getDomains (text)"
               clearable
             ></v-text-field>
           </v-flex>
@@ -65,11 +65,13 @@
     },
     methods: {
       getDomains () {
-        this.text = this.text.replace(/[^A-Z0-9-]+/ig, '')
-        tldsService.getDomains(this.text)
-          .then(response => {
-            this.domains = response
-          })
+        if (this.text) {
+          this.text = this.text.replace(/[^A-Z0-9-]+/ig, '')
+          tldsService.getDomains(this.text)
+            .then(response => {
+              this.domains = response
+            })
+        }
       }
     }
   }
