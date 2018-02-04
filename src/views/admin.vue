@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <h2>Admin</h2>
+  <section class="admin-section">
     <router-view/>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -10,3 +9,12 @@ export default {
   name: 'Admin'
 }
 </script>
+
+<style lang="scss" scoped>
+  .admin-section {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+  }
+</style>
