@@ -5,7 +5,13 @@ const mongoose = require('mongoose')
 const User = require('../model/user')
 const TLD = require('../model/tld')
 
-// create the database
+// drop database
+MongoClient.connect(DB.DB_URL, function (err, db) {
+  if (err) throw err
+  const dbo = db.db(DB.DB_NAME)
+  dbo.dropDatabase()
+})
+// create database
 MongoClient.connect(DB.DB_URL + DB.DB_NAME, (err, db) => {
   if (err) throw err
   db.close()
@@ -16,8 +22,7 @@ mongoose.connect(DB.DB_URL + DB.DB_NAME)
 // create a default user
 const defaultUser = new User({
   username: 'admin',
-  password: 'admin',
-  admin: true
+  password: Buffer.from('admin').toString('base64')
 })
 // insert into db the created user
 defaultUser.save((err) => {
