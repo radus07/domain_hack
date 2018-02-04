@@ -54,7 +54,7 @@
 </template>
 
 <script>
-  import {tldsService} from '@/api/tlds'
+  import {domainService} from '@/api/domains'
   export default {
     name: 'Home',
     data () {
@@ -67,7 +67,7 @@
       getDomains () {
         if (this.text) {
           this.text = this.text.replace(/[^A-Z0-9-]+/ig, '')
-          tldsService.getDomains(this.text)
+          domainService.getDomains(this.text)
             .then(response => {
               this.domains = response
             })
