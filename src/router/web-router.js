@@ -11,12 +11,14 @@ const webRoutes = [
       {
         path: 'home',
         name: 'web.home',
-        component: Home
+        component: Home,
+        meta: {title: 'Domain Hack'}
       },
       {
         path: 'sign_in',
         name: 'web.sign_in',
-        component: SignIn
+        component: SignIn,
+        meta: {title: 'Sign in', authenticated: false}
       }
     ]
   }

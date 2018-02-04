@@ -12,17 +12,20 @@ const adminRoutes = [
       {
         path: 'home',
         name: 'admin.home',
-        component: Home
+        component: Home,
+        meta: {title: 'Admin | Home', authenticated: true}
       },
       {
         path: 'users',
         name: 'admin.users',
-        component: Users
+        component: Users,
+        meta: {title: 'Admin | Users', authenticated: true}
       },
       {
         path: 'tlds',
         name: 'admin.tlds',
-        component: Tlds
+        component: Tlds,
+        meta: {title: 'Admin | TLDs', authenticated: true}
       }
     ]
   }
