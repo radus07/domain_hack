@@ -22,7 +22,7 @@ module.exports = (app) => {
     })
   })
   app.put('/api/users', (req, res) => {
-    User.update({_id: req.body.id}, {username: req.body.username}, {upsert: true}, (err) => {
+    User.update({_id: req.body._id}, {username: req.body.username}, {upsert: true}, (err) => {
       if (err) res.json({status: 403})
       else res.json({status: 200})
     })
