@@ -4,6 +4,9 @@
       <v-flex xs12 lg8>
         <v-card>
           <v-card-title>
+            <v-btn icon flat :to="{name: 'admin.home'}">
+              <v-icon>arrow_back</v-icon>
+            </v-btn>
             <h3 class="headline mb-0">TLDS</h3>
             <v-spacer></v-spacer>
             <v-snackbar

@@ -46,7 +46,9 @@
             <v-btn flat @click="text='arialius'; getDomains()">arialius</v-btn>
             <v-btn flat @click="text='mucuses'; getDomains()">mucuses</v-btn>.
           </h3>
-          <v-btn class="mt-5" style="width: 200px;" round :to="{name: 'web.sign_in'}">sign in</v-btn>
+          <v-btn v-if="!user.auth" class="mt-5" style="width: 200px;" round :to="{name: 'web.sign_in'}">sign in</v-btn>
+          <v-btn v-if="user.auth" class="mt-5" style="width: 200px;" round :to="{name: 'admin.home'}">go to the admin page</v-btn>
+          <v-btn v-if="user.auth" class="mt-5" round @click="logout()">sign out</v-btn>
         </div>
       </v-flex>
     </v-layout>
@@ -55,15 +57,26 @@
 
 <script>
   import {domainService} from '@/api/domains'
+  import {authService} from '@/api/auth'
   export default {
     name: 'Home',
+    mounted () {
+      this.setUserDetails()
+    },
     data () {
       return {
+        user: {},
         text: null,
         domains: []
       }
     },
     methods: {
+      setUserDetails () {
+        authService.getUserDetails()
+          .then(user => {
+            this.user = user
+          })
+      },
       getDomains () {
         if (this.text) {
           this.text = this.text.replace(/[^A-Z0-9-]+/ig, '')
@@ -72,6 +85,10 @@
               this.domains = response
             })
         }
+      },
+      logout () {
+        localStorage.removeItem('token')
+        this.$router.push({name: 'web.sign_in'})
       }
     }
   }
