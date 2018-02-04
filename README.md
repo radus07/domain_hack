@@ -7,9 +7,9 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
 ### 1. Install NodeJS and NPM
  - Download from - https://nodejs.org/en/
 
-### 2. Download and install MonggoDB
+### 2. Download and install MongoDB
  - Download manually from - https://www.mongodb.com/download-center
- - After installation, open Command Prompt and run the following commands:
+ - After installation, open the Command Prompt and run the following commands:
  ```
     > md \data\db
     > "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath 'path-to-your \data\db folder'
@@ -43,6 +43,11 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
     > npm run "start frontend"
  ```
  - Open your browser on - [http://localhost:8081/](http://localhost:8081)
+ - Or run in `dev` mode
+ ```
+    > npm run "dev"
+ ```
+ - Open your browser on - [http://localhost:8080/](http://localhost:8080)
  - ENJOY THE APP!
 
 ### 5. NOTE!
