@@ -17,7 +17,7 @@
         </v-list-tile>
       </v-flex>
       <v-flex xs12 sm6>
-        <v-list-tile avatar @click="">
+        <v-list-tile avatar :to="{name: 'admin.tlds'}">
           <v-list-tile-avatar>
             <v-icon>language</v-icon>
           </v-list-tile-avatar>

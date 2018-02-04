@@ -1,6 +1,7 @@
 import Admin from '@/views/admin'
 import Home from '@/components/admin/home/home'
 import Users from '@/components/admin/users/users'
+import Tlds from '@/components/admin/tlds/tlds'
 
 const adminRoutes = [
   {
@@ -17,6 +18,11 @@ const adminRoutes = [
         path: 'users',
         name: 'admin.users',
         component: Users
+      },
+      {
+        path: 'tlds',
+        name: 'admin.tlds',
+        component: Tlds
       }
     ]
   }
