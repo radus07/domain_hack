@@ -30,6 +30,10 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
  ```
 ### 4. Run the project
  - Open the root folder
+ - Install the dependencies:
+ ```
+    > npm install
+ ```
  - Init the project:
  ```
     > npm run "init"
