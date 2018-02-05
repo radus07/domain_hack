@@ -9,14 +9,10 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
 
 ### 2. Download and install MongoDB
  - Download manually from - https://www.mongodb.com/download-center
- - After installation, open the Command Prompt and run the following commands:
+ - After installation, open the Command Prompt on disk C and run the following commands:
  ```
     > md \data\db
-    > "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath 'path-to-your \data\db folder'
- ```
- - Start MongoDB, from the Command Prompt:
- ```
-    > "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe"
+    > "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "path-to-your \data\db folder"
  ```
  - Connect to MongoDB, open another Command Prompt:
  ```
@@ -38,11 +34,11 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
  ```
     > npm run "init"
  ```
- - Start the backend server:
+ - Start the backend server, use another Command Prompt:
  ```
     > npm run "start backend"
  ```
- - Run the application on http server, from the another Command Prompt:
+ - Start the application on http server, use another Command Prompt:
  ```
     > npm run "start frontend"
  ```
@@ -55,4 +51,5 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
  - ENJOY THE APP!
 
 ### 5. NOTE!
+For sign in use: username = password = "admin"
 Don't run the application in IE or MS Edge.
