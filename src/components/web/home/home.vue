@@ -87,8 +87,7 @@
         }
       },
       logout () {
-        localStorage.removeItem('token')
-        this.$router.push({name: 'web.sign_in'})
+        authService.logoutUser(this.$router)
       }
     }
   }

@@ -38,12 +38,12 @@
 </template>
 
 <script>
+  import {authService} from '@/api/auth'
   export default {
     name: 'Home',
     methods: {
       logout () {
-        localStorage.removeItem('token')
-        this.$router.push({name: 'web.sign_in'})
+        authService.logoutUser(this.$router)
       }
     }
   }
