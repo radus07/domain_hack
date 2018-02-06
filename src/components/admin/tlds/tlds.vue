@@ -106,8 +106,8 @@
                       label="Edit"
                       v-model="editTld.tld"
                       single-line
-                      :counter="30"
-                      maxlength="30"
+                      :counter="5"
+                      maxlength="5"
                       autofocus
                     ></v-text-field>
                   </v-edit-dialog>
@@ -129,8 +129,8 @@
                       label="Edit"
                       v-model="editTld.country"
                       single-line
-                      :counter="30"
-                      maxlength="30"
+                      :counter="150"
+                      maxlength="150"
                       autofocus
                     ></v-text-field>
                   </v-edit-dialog>
