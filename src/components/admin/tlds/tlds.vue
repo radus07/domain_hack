@@ -199,8 +199,9 @@
       deleteTlds (tlds) {
         tldService.deleteTlds(tlds)
           .then(() => {
+            const message = (this.selected.length > 1) ? 'Items were' : 'Item was'
             this.selected = []
-            this.snackbarInfo = 'Items were deleted!'
+            this.snackbarInfo = `${message} deleted!`
             this.showSnackbar = true
             this.fetchTlds()
           })
@@ -217,7 +218,7 @@
                   this.fetchTlds()
                 })
                 .catch(() => {
-                  this.snackbarInfo = 'User was not created!'
+                  this.snackbarInfo = 'Item was not created!'
                   this.showSnackbar = true
                   this.dialog = false
                 })

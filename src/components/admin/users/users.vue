@@ -185,8 +185,9 @@
       deleteUsers (users) {
         userService.deleteUsers(users)
           .then(() => {
+            const message = (this.selected.length > 1) ? 'Users were' : 'User was'
             this.selected = []
-            this.snackbarInfo = 'Users were deleted!'
+            this.snackbarInfo = `${message} deleted!`
             this.showSnackbar = true
             this.fetchUsers()
           })
