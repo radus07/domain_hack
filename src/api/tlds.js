@@ -1,7 +1,10 @@
-import axios from 'axios'
+import axios from '@/api/axios.config'
 
-const API_URL = 'http://localhost:8083/api/tlds'
+const API_URL = '/api/tlds'
 
+/**
+ * a CRUD service for manage the TLDS entity
+ */
 export const tldService = {
   getTlds () {
     return new Promise((resolve, reject) => {

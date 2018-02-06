@@ -1,5 +1,5 @@
-import axios from 'axios'
-const API_URL = 'http://localhost:8083/api/tlds'
+import axios from '@/api/axios.config'
+const API_URL = '/api/tlds'
 
 export const domainService = {
   getTlds () {
@@ -12,7 +12,7 @@ export const domainService = {
     })
   },
   /**
-   * this method checks if inserted text contains a tld
+   * check if inserted text contains a tld code, and next generate domains depends on these tlds
    * @param text - inserted text
    * @returns {Promise}
    */
@@ -29,7 +29,7 @@ export const domainService = {
     })
   },
   /**
-   * this method generates all possible domains
+   * generate all possible domains
    * @param text - inserted text
    * @param countries - list of countries which are contained in the inserted text
    * @returns {Array}

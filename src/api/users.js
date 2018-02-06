@@ -1,7 +1,10 @@
-import axios from 'axios'
+import axios from '@/api/axios.config'
 
-const API_URL = 'http://localhost:8083/api/users'
+const API_URL = '/api/users'
 
+/**
+ * a CRUD service for manage the USERS entity
+ */
 export const userService = {
   getUsers () {
     return new Promise((resolve, reject) => {
