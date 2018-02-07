@@ -3,6 +3,7 @@ import App from '@/App'
 import router from './router'
 import Vuetify from 'vuetify'
 import VeeValidate from 'vee-validate'
+import 'babel-polyfill'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
