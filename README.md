@@ -8,7 +8,7 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
  - Download from - https://nodejs.org/en/
 
 ### 2. Download and install MongoDB
- - Download manually from - https://www.mongodb.com/download-center
+ - Download from - https://www.mongodb.com/download-center
  - After installation, open the Command Prompt on disk C and run the following commands:
  ```
     > md \data\db
@@ -19,7 +19,7 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
     > "C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe"
  ```
 ### 3. Download the project
- - Download from - https://github.com/radus07/damain_hack.git
+ - Download manually from - https://github.com/radus07/damain_hack.git
  - Or, using git, from the Command Prompt:
  ```
     > git clone https://github.com/radus07/damain_hack.git
@@ -51,5 +51,4 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
  - ENJOY THE APP!
 
 ### 5. NOTE!
-For sign in use: username = password = "admin"
-Don't run the application in IE or MS Edge.
+For sign in use: username = password = "admin".
