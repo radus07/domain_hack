@@ -14,6 +14,11 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  if ((to.name === 'web.sign_in' || to.name.startsWith('admin')) && unsupportedBrowser()) {
+    alert('Unsupported! Please use another browser.')
+    if (!from.name) next({name: 'web.home'})
+    else return
+  }
   setDocumentTitle(to)
   doGuard(to, from, next)
 })
@@ -44,4 +49,10 @@ let doGuard = (to, from, next) => {
 
 let setDocumentTitle = (route) => {
   document.title = route.meta.title
+}
+
+let unsupportedBrowser = () => {
+  const isIE = !!document.documentMode
+  const isEdge = !isIE && !!window.StyleMedia
+  return (isIE || isEdge)
 }
