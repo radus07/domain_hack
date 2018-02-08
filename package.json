@@ -1,6 +1,6 @@
 {
   "name": "domain_hack",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A project for generating the domain names",
   "author": "Radu Balan <radu.balan.97@gmail.com>",
   "scripts": {
