@@ -1,6 +1,6 @@
 # domain_hack
 
-A **domain hack** is a domain name that suggests a word, phrase, or name when concatenating two or more adjacent levels of that domain. For example, "bir.ds" and "examp.le", using the fictitious country-code domains .ds and .le, suggest the word birds and example respectively. 
+A web application which depending on the inserted text, suggests the domain names. For example, if you input the text "birds" or "example", using the fictitious country-code domains ".ds" and ".le", suggests the domain names "bir.ds" or "examp.le" respectively. 
 
 ## Build Setup
 
@@ -19,10 +19,10 @@ A **domain hack** is a domain name that suggests a word, phrase, or name when co
     > "C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe"
  ```
 ### 3. Download the project
- - Download manually from - https://github.com/radus07/damain_hack.git
+ - Download manually from - https://github.com/radus07/domain_hack.git
  - Or, using git, from the Command Prompt:
  ```
-    > git clone https://github.com/radus07/damain_hack.git
+    > git clone https://github.com/radus07/domain_hack.git
  ```
 ### 4. Run the project
  - Open the root folder
