@@ -52,7 +52,5 @@ let setDocumentTitle = (route) => {
 }
 
 let unsupportedBrowser = () => {
-  const isIE = !!document.documentMode
-  const isEdge = !isIE && !!window.StyleMedia
-  return (isIE || isEdge)
+  return !!document.documentMode
 }

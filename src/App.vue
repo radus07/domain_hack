@@ -34,10 +34,10 @@
       height: 100%;
       overflow-y: hidden;
 
-      .content--wrap {
+      .content {
         height: calc(100% - 36px);
 
-        .content {
+        .content--wrap {
           overflow-y: auto;
         }
       }
