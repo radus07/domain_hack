@@ -57,7 +57,7 @@
 <script>
   import {authService} from '@/api/auth'
   export default {
-    name: 'SignIn',
+    name: 'sign-in',
     data () {
       return {
         user: {

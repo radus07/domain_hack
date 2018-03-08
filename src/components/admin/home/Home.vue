@@ -40,7 +40,7 @@
 <script>
   import {authService} from '@/api/auth'
   export default {
-    name: 'Home',
+    name: 'home',
     methods: {
       logout () {
         authService.logoutUser(this.$router)

@@ -1,7 +1,7 @@
-import Admin from '@/views/admin'
-import Home from '@/components/admin/home/home'
-import Users from '@/components/admin/users/users'
-import Tlds from '@/components/admin/tlds/tlds'
+import Admin from '@/views/Admin'
+import Home from '@/components/admin/home/Home'
+import Users from '@/components/admin/users/Users'
+import Tlds from '@/components/admin/tlds/Tlds'
 
 const adminRoutes = [
   {
@@ -31,4 +31,4 @@ const adminRoutes = [
   }
 ]
 
-export default adminRoutes
+export {adminRoutes}

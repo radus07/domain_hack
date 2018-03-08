@@ -59,7 +59,7 @@
   import {domainService} from '@/api/domains'
   import {authService} from '@/api/auth'
   export default {
-    name: 'Home',
+    name: 'home',
     mounted () {
       this.setUserDetails()
     },

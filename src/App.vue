@@ -3,16 +3,16 @@
     <v-content>
       <router-view/>
     </v-content>
-    <page-footer></page-footer>
+    <app-footer></app-footer>
   </v-app>
 </template>
 
 <script>
-  import PageFooter from './components/fragments/footer'
+  import AppFooter from './components/common/AppFooter'
   export default {
-    name: 'App',
+    name: 'app',
     components: {
-      PageFooter
+      AppFooter
     }
   }
 </script>

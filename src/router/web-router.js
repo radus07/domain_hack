@@ -1,6 +1,6 @@
-import Web from '@/views/web'
-import Home from '@/components/web/home/home'
-import SignIn from '@/components/web/sign_in/sign_in'
+import Web from '@/views/Web'
+import Home from '@/components/web/home/Home'
+import SignIn from '@/components/web/signIn/SignIn'
 
 const webRoutes = [
   {
@@ -24,4 +24,4 @@ const webRoutes = [
   }
 ]
 
-export default webRoutes
+export {webRoutes}

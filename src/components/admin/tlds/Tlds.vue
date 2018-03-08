@@ -7,7 +7,7 @@
             <v-btn icon flat :to="{name: 'admin.home'}">
               <v-icon>arrow_back</v-icon>
             </v-btn>
-            <h3 class="headline mb-0">Users</h3>
+            <h3 class="headline mb-0">TLDS</h3>
             <v-spacer></v-spacer>
             <v-snackbar
               :timeout="6000"
@@ -18,37 +18,31 @@
               <v-btn flat color="pink" @click.native="showSnackbar = false">Close</v-btn>
             </v-snackbar>
             <v-dialog v-model="dialog" persistent max-width="500px">
-              <v-btn fab outline small slot="activator" @click="newUser = {}">
+              <v-btn fab outline small slot="activator" @click="newTld = {}">
                 <v-icon>add</v-icon>
               </v-btn>
               <v-card>
                 <v-card-title>
-                  <span class="headline">User Details</span>
+                  <span class="headline">TLD Details</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container grid-list-md>
                     <v-layout wrap>
                       <v-flex xs12>
                         <v-text-field
-                          v-model="newUser.username"
-                          label="Username*"
-                          maxlength="30"
-                          prepend-icon="person"
-                          v-validate="'required|max:30'"
-                          data-vv-name="Username"
+                          v-model="newTld.tld"
+                          label="TLD*"
+                          maxlength="10"
+                          v-validate="'required|max:10'"
+                          data-vv-name="TLD"
                         ></v-text-field>
                       </v-flex>
                       <v-flex xs12>
                         <v-text-field
-                          v-model="newUser.password"
-                          label="Password*"
-                          name="password"
+                          v-model="newTld.country"
+                          label="Country*"
                           v-validate="'required'"
-                          data-vv-name="Password"
-                          :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                          :append-icon-cb="() => showPassword = !showPassword"
-                          :type="showPassword ? 'text' : 'password'"
-                          prepend-icon="lock"
+                          data-vv-name="Country"
                         ></v-text-field>
                       </v-flex>
                     </v-layout>
@@ -57,18 +51,18 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
-                  <v-btn color="blue darken-1" flat @click.native="saveUser(newUser)">Save</v-btn>
+                  <v-btn color="blue darken-1" flat @click.native="saveTld(newTld)">Save</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
             <v-tooltip top>
-              <v-btn @click="fetchUsers()" fab outline color="green" small icon slot="activator">
+              <v-btn @click="fetchTlds()" fab outline color="green" small icon slot="activator">
                 <v-icon>refresh</v-icon>
               </v-btn>
               <span>Get</span>
             </v-tooltip>
             <v-tooltip top>
-              <v-btn @click="deleteUsers(selected)" :disabled="!selected.length" small outline fab color="red" icon slot="activator">
+              <v-btn @click="deleteTlds(selected)" :disabled="!selected.length" small outline fab color="red" icon slot="activator">
                 <v-icon>close</v-icon>
               </v-btn>
               <span>Remove</span>
@@ -82,12 +76,12 @@
           </v-card-title>
           <v-data-table
             v-bind:headers="headers"
-            v-bind:items="users"
+            v-bind:items="tlds"
             v-bind:search="search"
             v-bind:pagination.sync="pagination"
             v-model="selected"
             select-all
-            item-key="username"
+            item-key="tld"
           >
             <template slot="items" slot-scope="props">
               <td>
@@ -100,27 +94,49 @@
               <td>
                 <v-tooltip top>
                   <v-edit-dialog
-                    @open="editUser =  Object.assign({}, props.item)"
-                    @save="updateUser(editUser)"
+                    @open="editTld =  Object.assign({}, props.item)"
+                    @save="updateTld(editTld)"
                     large
                     slot="activator"
                   >
-                    <div>{{ props.item.username }}</div>
-                    <div slot="input" class="mt-3 title">Edit username: {{props.item.username}}</div>
+                    <div>{{ props.item.tld }}</div>
+                    <div slot="input" class="mt-3 title">Edit tld: {{props.item.tld}}</div>
                     <v-text-field
                       slot="input"
                       label="Edit"
-                      v-model="editUser.username"
+                      v-model="editTld.tld"
                       single-line
-                      :counter="30"
-                      maxlength="30"
+                      :counter="5"
+                      maxlength="5"
                       autofocus
                     ></v-text-field>
                   </v-edit-dialog>
                   <span>Edit</span>
                 </v-tooltip>
               </td>
-              <td>{{props.item.password}}</td>
+              <td>
+                <v-tooltip top>
+                  <v-edit-dialog
+                    @open="editTld =  Object.assign({}, props.item)"
+                    @save="updateTld(editTld)"
+                    large
+                    slot="activator"
+                  >
+                    <div>{{ props.item.country }}</div>
+                    <div slot="input" class="mt-3 title">Edit country: {{props.item.country}}</div>
+                    <v-text-field
+                      slot="input"
+                      label="Edit"
+                      v-model="editTld.country"
+                      single-line
+                      :counter="150"
+                      maxlength="150"
+                      autofocus
+                    ></v-text-field>
+                  </v-edit-dialog>
+                  <span>Edit</span>
+                </v-tooltip>
+              </td>
             </template>
           </v-data-table>
         </v-card>
@@ -130,81 +146,79 @@
 </template>
 
 <script>
-  import {userService} from '@/api/users'
+  import {tldService} from '@/api/tlds'
   export default {
-    name: 'Users',
+    name: 'tlds',
     mounted () {
-      this.fetchUsers()
+      this.fetchTlds()
     },
     data () {
       return {
         dialog: false,
-        showPassword: false,
         showSnackbar: false,
         snackbarInfo: '',
-        newUser: {},
-        editUser: {},
+        newTld: {},
+        editTld: {},
         search: '',
         pagination: {},
         selected: [],
         headers: [
           {
-            text: 'Username',
+            text: 'TLD',
             align: 'left',
-            value: 'username'
+            value: 'tld'
           },
           {
-            text: 'Password',
+            text: 'Country',
             align: 'left',
-            sortable: false,
-            value: 'password'
+            value: 'country'
           }
         ],
-        users: []
+        tlds: []
       }
     },
     methods: {
-      updateUser (user) {
-        userService.updateUser(user)
+      updateTld (tld) {
+        tldService.updateTld(tld)
           .then(() => {
-            this.snackbarInfo = 'User was updated!'
+            this.snackbarInfo = 'Item was updated!'
             this.showSnackbar = true
-            this.fetchUsers()
+            this.fetchTlds()
           })
           .catch(() => {
-            this.snackbarInfo = 'User was not updated!'
+            this.snackbarInfo = 'Item was not updated!'
             this.showSnackbar = true
           })
       },
-      fetchUsers () {
-        userService.getUsers()
+      fetchTlds () {
+        tldService.getTlds()
           .then(res => {
-            this.users = res
+            this.tlds = res
           })
       },
-      deleteUsers (users) {
-        userService.deleteUsers(users)
+      deleteTlds (tlds) {
+        tldService.deleteTlds(tlds)
           .then(() => {
-            const message = (this.selected.length > 1) ? 'Users were' : 'User was'
+            const message = (this.selected.length > 1) ? 'Items were' : 'Item was'
             this.selected = []
             this.snackbarInfo = `${message} deleted!`
             this.showSnackbar = true
-            this.fetchUsers()
+            this.fetchTlds()
           })
       },
-      saveUser (user) {
+      saveTld (tld) {
         this.$validator.validateAll()
           .then(() => {
             if (this.$validator.errors.items.length === 0) {
-              userService.saveUser(user)
+              tldService.saveTld(tld)
                 .then(() => {
-                  this.snackbarInfo = 'User was created!'
+                  this.snackbarInfo = 'Item was created!'
                   this.showSnackbar = true
                   this.dialog = false
-                  this.fetchUsers()
+                  this.fetchTlds()
                 })
                 .catch(() => {
-                  this.snackbarInfo = 'User was not created!'
+                  this.snackbarInfo = 'Item was not created!'
                   this.showSnackbar = true
                   this.dialog = false
                 })
