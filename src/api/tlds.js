@@ -24,19 +24,26 @@ export const tldService = {
     })
   },
   saveTld (tld) {
-    return new Promise((resolve, reject) => {
-      axios.post(API_URL, tld)
-        .then((res) => {
-          if (res.data.status === 201) resolve()
-          else reject(new Error())
-        })
-    })
+    if (tld._id) {
+      return this.updateTld(tld)
+    } else {
+      return this.insertTld(tld)
+    }
   },
   updateTld (tld) {
     return new Promise((resolve, reject) => {
       axios.put(API_URL, tld)
         .then((res) => {
           if (res.data.status === 200) resolve()
+          else reject(new Error())
+        })
+    })
+  },
+  insertTld (tld) {
+    return new Promise((resolve, reject) => {
+      axios.post(API_URL, tld)
+        .then((res) => {
+          if (res.data.status === 201) resolve()
           else reject(new Error())
         })
     })

@@ -107,48 +107,18 @@
         this.selectedTlds = tlds
       },
       /**
-       * Depends on the tld status(existent/new) update/insert it
+       * Save tld
        * @param tld - the tld for saving
        */
       saveTld (tld) {
         this.tldForm.show = false
-        if (tld._id) {
-          this.updateTld(tld)
-        } else {
-          this.insertTld(tld)
-        }
-        this.fetchTlds()
-      },
-      /**
-       * Update an existing tld
-       * @param tld - the tld for updating
-       */
-      updateTld (tld) {
-        tldService.updateTld(tld)
-          .then(() => {
-            this.notificationSnackbar = {
-              show: true,
-              message: `The tld '${tld.tld}' has been updated!`
-            }
-          })
-          .catch(() => {
-            this.notificationSnackbar = {
-              show: true,
-              message: `An error occurred. Please try again!`
-            }
-          })
-      },
-      /**
-       * Insert a new tld
-       * @param tld - the tld for inserting
-       */
-      insertTld (tld) {
         tldService.saveTld(tld)
           .then(() => {
             this.notificationSnackbar = {
               show: true,
-              message: `The tld '${tld.tld}' has been created!`
+              message: `The tld '${tld.tld}' has been saved!`
             }
+            this.fetchTlds()
           })
           .catch(() => {
             this.notificationSnackbar = {
