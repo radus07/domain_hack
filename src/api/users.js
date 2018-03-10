@@ -24,19 +24,22 @@ export const userService = {
     })
   },
   saveUser (user) {
-    return new Promise((resolve, reject) => {
-      axios.post(API_URL, user)
-        .then((res) => {
-          if (res.data.status === 201) resolve()
-          else reject(new Error())
-        })
-    })
+    return (user._id) ? this.updateUser(user) : this.insertUser(user)
   },
   updateUser (user) {
     return new Promise((resolve, reject) => {
       axios.put(API_URL, user)
         .then((res) => {
           if (res.data.status === 200) resolve()
+          else reject(new Error())
+        })
+    })
+  },
+  insertUser (user) {
+    return new Promise((resolve, reject) => {
+      axios.post(API_URL, user)
+        .then((res) => {
+          if (res.data.status === 201) resolve()
           else reject(new Error())
         })
     })
