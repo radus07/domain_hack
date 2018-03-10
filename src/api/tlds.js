@@ -24,11 +24,7 @@ export const tldService = {
     })
   },
   saveTld (tld) {
-    if (tld._id) {
-      return this.updateTld(tld)
-    } else {
-      return this.insertTld(tld)
-    }
+    return (tld._id) ? this.updateTld(tld) : this.insertTld(tld)
   },
   updateTld (tld) {
     return new Promise((resolve, reject) => {

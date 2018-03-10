@@ -60,15 +60,29 @@
     name: 'sign-in',
     data () {
       return {
+        /**
+         * Contains details about the user
+         * @property username - user's username
+         * @property password - user's password
+         */
         user: {
           username: '',
           password: ''
         },
+        /**
+         * A flag which set the type of password field
+         */
         showPassword: false,
+        /**
+         * A flag which show or hide the error message
+         */
         hasErrors: false
       }
     },
     methods: {
+      /**
+       * Login the user
+       */
       submit () {
         this.$validator.validateAll()
           .then(() => {

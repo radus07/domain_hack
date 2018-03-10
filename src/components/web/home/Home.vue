@@ -65,18 +65,33 @@
     },
     data () {
       return {
+        /**
+         * Contains details about user
+         */
         user: {},
+        /**
+         * Text model for getting the inserted text by the user
+         */
         text: null,
+        /**
+         * The list of possible domain names
+         */
         domains: []
       }
     },
     methods: {
+      /**
+       * Get users's details from db
+       */
       setUserDetails () {
         authService.getUserDetails()
           .then(user => {
             this.user = user
           })
       },
+      /**
+       * Get all possible domain names depends on inserted text
+       */
       getDomains () {
         if (this.text) {
           this.text = this.text.replace(/[^A-Z0-9-]+/ig, '')
@@ -86,6 +101,9 @@
             })
         }
       },
+      /**
+       * Logout the logged user
+       */
       logout () {
         authService.logoutUser(this.$router)
       }

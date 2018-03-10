@@ -42,6 +42,9 @@
   export default {
     name: 'home',
     methods: {
+      /**
+       * Logout the logged user
+       */
       logout () {
         authService.logoutUser(this.$router)
       }
