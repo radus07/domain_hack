@@ -9,14 +9,10 @@ A web application which depending on the inserted text, suggests the domain name
 
 ### 2. Download and install MongoDB
  - Download from - https://www.mongodb.com/download-center
- - After installation, open the Command Prompt on disk C and run the following commands:
+ - After installation, open the Command Prompt and run the following commands:
  ```
     > md \data\db
     > "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath "path-to-your \data\db folder"
- ```
- - Connect to MongoDB, open another Command Prompt:
- ```
-    > "C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe"
  ```
 ### 3. Download the project
  - Download manually from - https://github.com/radus07/domain_hack.git
@@ -32,22 +28,22 @@ A web application which depending on the inserted text, suggests the domain name
  ```
  - Init the project:
  ```
-    > npm run "init"
+    > npm run init
  ```
- - Start the backend server, use another Command Prompt:
+ - Start the backend server:
  ```
-    > npm run "start backend"
+    > npm run start:b
  ```
- - Start the application on http server, use another Command Prompt:
- ```
-    > npm run "start frontend"
- ```
- - Open your browser on - [http://localhost:8081/](http://localhost:8081)
- - Or run in `dev` mode
- ```
-    > npm run "dev"
- ```
- - Open your browser on - [http://localhost:8080/](http://localhost:8080)
+ - Start the application:
+    * _The compiled version:_
+     ```
+        > npm run start:f
+     ```
+     Open [http://localhost:8081/](http://localhost:8081)
+     * _In `development` mode:_
+     ```
+        > npm run dev
+     ```
  - ENJOY THE APP!
 
 ### 5. NOTE!
