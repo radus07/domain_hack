@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {authService} from './auth'
 
-// set base url using for REST requests
+// set base url used for REST requests
 axios.defaults.baseURL = 'http://localhost:8083'
 
 /**
@@ -13,6 +13,6 @@ axios.interceptors.request.use((config) => {
 })
 
 /**
- * user this axios instance for REST requests, import it where you need
+ * use this axios instance for REST requests, import it where is needed
  */
 export default axios

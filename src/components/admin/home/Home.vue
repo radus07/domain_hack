@@ -3,7 +3,7 @@
     <div>
       <v-layout>
         <v-flex xs12>
-          <v-btn class="mt-5" style="width: 300px;" round :to="{name: 'web.home'}">go to the domain names generator</v-btn>
+          <v-btn class="mt-5" round :to="{name: 'web.home'}">home page</v-btn>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
