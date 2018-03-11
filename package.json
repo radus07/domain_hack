@@ -8,8 +8,8 @@
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
     "init": "node backend/init/init.js",
-    "start backend": "node backend/server.js",
-    "start frontend": "node dist/server.js"
+    "start:b": "node backend/server.js",
+    "start:f": "node dist/server.js"
   },
   "dependencies": {
     "vue": "^2.5.13",
