@@ -1,6 +1,7 @@
 <template>
   <v-container grid-list-xs>
-    <v-layout>
+    <app-error v-if="serverConnectionError" :error="serverConnectionError"></app-error>
+    <v-layout v-if="!serverConnectionError">
       <v-flex xs12 xl8>
         <v-layout>
           <v-flex xs8>
@@ -58,10 +59,12 @@
 <script>
   import {domainService} from '@/api/domains'
   import {authService} from '@/api/auth'
+  import AppError from '@/components/common/AppError'
 
   export default {
     name: 'home',
     mounted () {
+      this.checkServerConnection()
       this.setUserDetails()
     },
     data () {
@@ -77,10 +80,31 @@
         /**
          * The list of possible domain names
          */
-        domains: []
+        domains: [],
+        /**
+         * A flag for showing/hiding the error message
+         */
+        serverConnectionError: false
       }
     },
     methods: {
+      /**
+       * Check the server connection when the route contains error params
+       */
+      checkServerConnection () {
+        if (this.$route.name === 'web.home' &&
+          this.$route.query.error &&
+          this.$route.query.error_type === 'ERR_CONNECTION_REFUSED') {
+          authService.checkConnection()
+            .then(() => {
+              this.$router.replace({name: 'web.home'})
+              this.serverConnectionError = false
+            })
+            .catch(() => {
+              this.serverConnectionError = true
+            })
+        }
+      },
       /**
        * Get users's details from db
        */
@@ -108,6 +132,17 @@
       logout () {
         authService.logoutUser(this.$router)
       }
+    },
+    watch: {
+      /**
+       * Watch when the route's params has changed, and check the server connection
+       */
+      '$route.query' () {
+        this.checkServerConnection()
+      }
+    },
+    components: {
+      AppError
     }
   }
 </script>

@@ -26,20 +26,26 @@ router.beforeEach((to, from, next) => {
 export default router
 
 let doGuard = (to, from, next) => {
-  authService.getUserDetails()
-    .then(user => {
-      if (to.meta.authenticated === undefined) next()
-      else if (to.meta.authenticated) {
-        if (user.auth) next()
-        else {
-          setDocumentTitle(from)
-          next({name: 'web.sign_in'})
+  if (to.name === 'web.home' &&
+      to.query.error &&
+      to.query.error_type === 'ERR_CONNECTION_REFUSED') {
+    next()
+  } else {
+    authService.getUserDetails()
+      .then(user => {
+        if (to.meta.authenticated === undefined) next()
+        else if (to.meta.authenticated) {
+          if (user.auth) next()
+          else {
+            setDocumentTitle(from)
+            next({name: 'web.sign_in'})
+          }
+        } else {
+          if (user.auth) next({name: 'web.home'})
+          else next()
         }
-      } else {
-        if (user.auth) next({name: 'web.home'})
-        else next()
-      }
-    })
+      })
+  }
 }
 
 let setDocumentTitle = (route) => {

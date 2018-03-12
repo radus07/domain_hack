@@ -46,5 +46,13 @@ export const authService = {
   logoutUser (router) {
     localStorage.removeItem('token')
     router.push({name: 'web.sign_in'})
+  },
+  checkConnection () {
+    return new Promise((resolve, reject) => {
+      axios.get('/api/users/s')
+        .then((res) => {
+          (res) ? resolve() : reject(new Error())
+        })
+    })
   }
 }
