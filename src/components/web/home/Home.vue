@@ -15,30 +15,7 @@
             ></v-text-field>
           </v-flex>
         </v-layout>
-        <div v-if="text" class="domain-list">
-          <v-layout class="text-xs-left pb-2 pl-2 headline">
-            <v-flex xs8>
-              Domain
-            </v-flex>
-            <v-flex xs4 class="pl-3">
-              Country
-            </v-flex>
-          </v-layout>
-          <div class="domain-items">
-            <v-layout v-for="domain in domains" v-bind:key="domain._id" class="text-xs-left pl-2">
-              <v-flex xs8>
-                <div class="domain-item">
-                  <span class="domain-name">{{(domain.name) ? domain.name : 'xxx'}}</span>.
-                  <span class="domain-tld">{{domain.tld}}</span>/
-                  <span class="domain-path">{{domain.path}}</span>
-                </div>
-              </v-flex>
-              <v-flex xs4 class="pl-3">
-                <div><span>{{domain.country}}</span></div>
-              </v-flex>
-            </v-layout>
-          </div>
-        </div>
+        <domain-list v-if="text" :domains="domains"></domain-list>
         <div class="info-container pt-5" v-else="text">
           <h2>Welcome to Domain Hack</h2>
           <h3 class="pt-3">For generating domain names, you must to input something.</h3>
@@ -60,6 +37,7 @@
   import {domainService} from '@/api/domains'
   import {authService} from '@/api/auth'
   import AppError from '@/components/common/AppError'
+  import DomainList from './fragments/DomainList'
 
   export default {
     name: 'home',
@@ -142,7 +120,8 @@
       }
     },
     components: {
-      AppError
+      AppError,
+      DomainList
     }
   }
 </script>
@@ -165,37 +144,6 @@
 
         * {
           background: transparent;
-        }
-      }
-
-      .domain-list {
-        height: calc(100% - 76px);
-        position: relative;
-        float: left;
-        width: 100%;
-
-        .domain-items {
-          position: absolute;
-          overflow: hidden;
-          height: calc(100% - 40px);
-          width: 100%;
-          overflow-y: auto;
-
-          .layout {
-            border-bottom: 1px solid rgba(0,0,0,.12);
-
-            .domain-item {
-              word-wrap: break-word;
-
-              .domain-tld {
-                color: rgb(0, 10, 163);
-              }
-
-              .domain-path {
-                font-style: italic;
-              }
-            }
-          }
         }
       }
 
