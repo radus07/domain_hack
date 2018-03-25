@@ -1,6 +1,6 @@
-const http = require('http')
 const express = require('express')
 const parser = require('body-parser')
+const PORT = 8083
 
 const app = express()
 
@@ -15,6 +15,6 @@ app.use((req, res, next) => {
 
 require('./routes')(app)
 
-http.createServer(app).listen(8083, () => {
-  console.log('Server started')
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`)
 })
