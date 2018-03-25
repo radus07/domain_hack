@@ -1,6 +1,7 @@
 import Web from '@/views/Web'
 import Home from '@/components/web/home/Home'
 import SignIn from '@/components/web/signIn/SignIn'
+import AppError from '@/components/common/AppError'
 
 const webRoutes = [
   {
@@ -21,6 +22,13 @@ const webRoutes = [
         meta: {title: 'Sign in', authenticated: false}
       }
     ]
+  },
+  {
+    path: '*',
+    name: 'web.notFound',
+    component: AppError,
+    props: {appError: {error: true, message: 'The page you are looking for was not found!', type: 'PAGE_NOT_FOUND'}},
+    meta: {title: '404 Page Not Found'}
   }
 ]
 

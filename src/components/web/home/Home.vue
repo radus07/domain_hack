@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-xs>
-    <app-error v-if="serverConnectionError" :error="serverConnectionError"></app-error>
-    <v-layout v-if="!serverConnectionError">
+    <app-error v-if="appError.error" :appError="appError"></app-error>
+    <v-layout v-if="!appError.error">
       <v-flex xs12 xl8>
         <v-layout>
           <v-flex xs8>
@@ -60,9 +60,13 @@
          */
         domains: [],
         /**
-         * A flag for showing/hiding the error message
+         * Details about the error when server not responds
          */
-        serverConnectionError: false
+        appError: {
+          error: false,
+          type: 'ERR_CONNECTION_REFUSED',
+          message: 'Cannot connect to the server. Please try again later. :('
+        }
       }
     },
     methods: {
@@ -76,10 +80,10 @@
           authService.checkConnection()
             .then(() => {
               this.$router.replace({name: 'web.home'})
-              this.serverConnectionError = false
+              this.appError.error = false
             })
             .catch(() => {
-              this.serverConnectionError = true
+              this.appError.error = true
             })
         }
       },
