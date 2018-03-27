@@ -1,6 +1,6 @@
 const DB = require('../../config/config')
 const mongoose = require('mongoose')
-const User = require('../../model/user')
+const User = require('../../models/user')
 
 mongoose.connect(DB.DB_URL + DB.DB_NAME)
 

@@ -1,6 +1,6 @@
 const CONFIG = require('../../config/config')
 const mongoose = require('mongoose')
-const User = require('../../model/user')
+const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 
 mongoose.connect(CONFIG.DB_URL + CONFIG.DB_NAME)

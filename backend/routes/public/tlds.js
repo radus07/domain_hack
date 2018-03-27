@@ -1,6 +1,6 @@
 const DB = require('../../config/config')
 const mongoose = require('mongoose')
-const TLD = require('../../model/tld')
+const TLD = require('../../models/tld')
 
 mongoose.connect(DB.DB_URL + DB.DB_NAME)
 
