@@ -7,41 +7,36 @@ const API_URL = '/api/tlds'
  */
 export const tldService = {
   getTlds () {
-    return new Promise((resolve, reject) => {
-      axios.get(API_URL)
-        .then(result => {
-          if (result.data.status === 200) resolve(result.data.data)
-          else reject(result.data.status)
-        })
-    })
+    return axios.get(API_URL)
+      .then(result => {
+        return (result.data.status === 200)
+          ? Promise.resolve(result.data.data)
+          : Promise.reject(result.data.status)
+      })
   },
   deleteTlds (tlds) {
-    return new Promise((resolve) => {
-      axios.delete(API_URL, {data: {tlds: tlds}})
-        .then((res) => {
-          if (res.data.status === 200) resolve()
-        })
-    })
+    return axios.delete(API_URL, {data: {tlds: tlds}})
+      .then(result => {
+        if (result.data.status === 200) return Promise.resolve()
+      })
   },
   saveTld (tld) {
     return (tld._id) ? this.updateTld(tld) : this.insertTld(tld)
   },
   updateTld (tld) {
-    return new Promise((resolve, reject) => {
-      axios.put(API_URL, tld)
-        .then((res) => {
-          if (res.data.status === 200) resolve()
-          else reject(new Error())
-        })
-    })
+    return axios.put(API_URL, tld)
+      .then(result => {
+        return (result.data.status === 200)
+          ? Promise.resolve()
+          : Promise.reject(new Error())
+      })
   },
   insertTld (tld) {
-    return new Promise((resolve, reject) => {
-      axios.post(API_URL, tld)
-        .then((res) => {
-          if (res.data.status === 201) resolve()
-          else reject(new Error())
-        })
-    })
+    return axios.post(API_URL, tld)
+      .then(result => {
+        return (result.data.status === 201)
+          ? Promise.resolve()
+          : Promise.reject(new Error())
+      })
   }
 }

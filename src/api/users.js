@@ -7,41 +7,36 @@ const API_URL = '/api/users'
  */
 export const userService = {
   getUsers () {
-    return new Promise((resolve, reject) => {
-      axios.get(API_URL)
-        .then(result => {
-          if (result.data.status === 200) resolve(result.data.data)
-          else reject(result.data.status)
-        })
-    })
+    return axios.get(API_URL)
+      .then(result => {
+        return (result.data.status === 200)
+          ? Promise.resolve(result.data.data)
+          : Promise.reject(result.data.status)
+      })
   },
   deleteUsers (users) {
-    return new Promise((resolve) => {
-      axios.delete(API_URL, {data: {users: users}})
-        .then((res) => {
-          if (res.data.status === 200) resolve()
-        })
-    })
+    return axios.delete(API_URL, {data: {users: users}})
+      .then(result => {
+        if (result.data.status === 200) return Promise.resolve()
+      })
   },
   saveUser (user) {
     return (user._id) ? this.updateUser(user) : this.insertUser(user)
   },
   updateUser (user) {
-    return new Promise((resolve, reject) => {
-      axios.put(API_URL, user)
-        .then((res) => {
-          if (res.data.status === 200) resolve()
-          else reject(new Error())
-        })
-    })
+    return axios.put(API_URL, user)
+      .then(result => {
+        return (result.data.status === 200)
+          ? Promise.resolve()
+          : Promise.reject(new Error())
+      })
   },
   insertUser (user) {
-    return new Promise((resolve, reject) => {
-      axios.post(API_URL, user)
-        .then((res) => {
-          if (res.data.status === 201) resolve()
-          else reject(new Error())
-        })
-    })
+    return axios.post(API_URL, user)
+      .then(result => {
+        return (result.data.status === 201)
+          ? Promise.resolve()
+          : Promise.reject(new Error())
+      })
   }
 }

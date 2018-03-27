@@ -3,13 +3,12 @@ import axios from '@/api/axios.config'
 export const authService = {
   authenticateUser (user) {
     user = this.validateUser(user)
-    return new Promise((resolve, reject) => {
-      axios.post(`/api/authenticate`, user)
-        .then(result => {
-          if (result.data.status === 200) resolve(result.data.data)
-          else reject(result.data.status)
-        })
-    })
+    return axios.post(`/api/authenticate`, user)
+      .then(result => {
+        return (result.data.status === 200)
+          ? Promise.resolve(result.data.data)
+          : Promise.reject(result.data.status)
+      })
   },
   validateUser (user) {
     const username = user.username.trim().toString()
@@ -20,10 +19,8 @@ export const authService = {
     }
   },
   saveToken (token) {
-    return new Promise((resolve, reject) => {
-      localStorage.setItem('token', JSON.stringify(token))
-      resolve()
-    })
+    localStorage.setItem('token', JSON.stringify(token))
+    return Promise.resolve()
   },
   isAuthenticated () {
     return localStorage.getItem('token') !== null
@@ -32,27 +29,24 @@ export const authService = {
     return JSON.parse(localStorage.getItem('token'))
   },
   getUserDetails () {
-    return new Promise((resolve) => {
-      if (this.isAuthenticated()) {
-        const id = JSON.parse(atob(this.getToken().split('.')[1])).user_id
-        axios.get(`/api/users/${id}`)
-          .then((res) => {
-            if (res.data.status === 200) resolve({auth: true})
-            else resolve({auth: false})
-          })
-      } else resolve({auth: false})
-    })
+    if (this.isAuthenticated()) {
+      const id = JSON.parse(atob(this.getToken().split('.')[1])).user_id
+      return axios.get(`/api/users/${id}`)
+        .then(result => {
+          return (result.data.status === 200)
+            ? Promise.resolve({auth: true})
+            : Promise.resolve({auth: false})
+        })
+    } else return Promise.resolve({auth: false})
   },
   logoutUser (router) {
     localStorage.removeItem('token')
     router.push({name: 'web.sign_in'})
   },
   checkConnection () {
-    return new Promise((resolve, reject) => {
-      axios.get('/api/users/s')
-        .then((res) => {
-          (res) ? resolve() : reject(new Error())
-        })
-    })
+    return axios.get('/api/users/s')
+      .then(result => {
+        return result ? Promise.resolve() : Promise.reject(new Error())
+      })
   }
 }

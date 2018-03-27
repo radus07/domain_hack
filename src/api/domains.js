@@ -3,33 +3,30 @@ const API_URL = '/api/tlds'
 
 export const domainService = {
   getTlds () {
-    return new Promise((resolve, reject) => {
-      axios.get(API_URL)
-        .then(result => {
-          if (result.data.status === 200) resolve(result.data.data)
-          else reject(result.data.status)
-        })
-    })
+    return axios.get(API_URL)
+      .then(result => {
+        return (result.data.status === 200)
+          ? Promise.resolve(result.data.data)
+          : Promise.reject(result.data.status)
+      })
   },
   /**
-   * check if inserted text contains a tld code, and next generate domains depends on these tlds
+   * Check if inserted text contains a tld code, and next generate domains depends on these tlds
    * @param text - inserted text
    * @returns {Promise}
    */
   getDomains (text) {
-    return new Promise(resolve => {
-      this.getTlds()
-        .then(items => {
-          let tlds = []
-          items.forEach(item => {
-            if (text.match(item.tld)) tlds.push(item)
-          })
-          resolve(this.generateDomainsForCountries(text, tlds))
+    return this.getTlds()
+      .then(items => {
+        let tlds = []
+        items.forEach(item => {
+          if (text.match(item.tld)) tlds.push(item)
         })
-    })
+        return Promise.resolve(this.generateDomainsForCountries(text, tlds))
+      })
   },
   /**
-   * generate all possible domains
+   * Generate all possible domains
    * @param text - inserted text
    * @param countries - list of countries which are contained in the inserted text
    * @returns {Array}
