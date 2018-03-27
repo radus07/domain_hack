@@ -2,29 +2,15 @@ const DB = require('../config/config')
 const fs = require('fs')
 const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose')
-const User = require('../model/user')
-const TLD = require('../model/tld')
-
-const defaultUser = new User({
-  username: 'admin',
-  password: Buffer.from('admin').toString('base64')
-})
-
-Promise.all([
-  dropDatabase(),
-  createDatabase(),
-  connectToDatabase(),
-  saveUser(defaultUser),
-  saveTlds(getTlds()),
-  closeConnection()
-])
+const User = require('../models/user')
+const TLD = require('../models/tld')
 
 /**
- * connect to MongoDB server and try to drop if exists database with our name
+ * Connect to MongoDB server and drop database with our name
  * @returns {Promise.<MongoClient>}
  */
-function dropDatabase () {
-  return MongoClient.connect(DB.DB_URL, function (err, db) {
+const dropDatabase = async () => {
+  await MongoClient.connect(DB.DB_URL, function (err, db) {
     if (err) throw err
     const dbo = db.db(DB.DB_NAME)
     dbo.dropDatabase()
@@ -32,65 +18,67 @@ function dropDatabase () {
 }
 
 /**
- * connect to MongoDB server and create a new database
+ * Connect to MongoDB server and create a new database
  * @returns {Promise.<MongoClient>}
  */
-function createDatabase () {
-  return MongoClient.connect(DB.DB_URL + DB.DB_NAME, (err, db) => {
+const createDatabase = async () => {
+  await MongoClient.connect(DB.DB_URL + DB.DB_NAME, (err, db) => {
     if (err) throw err
     db.close()
   })
 }
 
 /**
- * use mongoose to connect to the database
+ * Use mongoose to connect to the database
  * @returns {Promise}
  */
-function connectToDatabase () {
-  return mongoose.connect(DB.DB_URL + DB.DB_NAME)
+const connectToDatabase = async () => {
+  await mongoose.connect(DB.DB_URL + DB.DB_NAME)
 }
 
 /**
- * save a default user
- * @param user
- */
-function saveUser (user) {
-  return user.save((err) => {
-    if (err) throw err
-  })
-}
-
-/**
- * read all default tlds and origin country from mock file
+ * Create a list of users
  * @returns {Array}
  */
-function getTlds () {
+const getUsers = () => {
+  let users = []
+  users.push(new User({username: 'admin', password: Buffer.from('admin').toString('base64')}))
+  return users
+}
+
+/**
+ * Read the list of tlds from mock file
+ * @returns {Array}
+ */
+const getTlds = () => {
   const data = JSON.parse(fs.readFileSync('backend/init/tld.json', 'utf8'))
   let tlds = []
-  data.forEach(item => {
-    tlds.push(new TLD({country: item.country_name, tld: item.tld}))
-  })
+  data.map(item => tlds.push(new TLD({country: item.country_name, tld: item.tld})))
   return tlds
 }
 
 /**
- * save all default tlds from mock file
- * @param tlds
+ * Insert a list of items into db
+ * @param items
  */
-function saveTlds (tlds) {
-  tlds.forEach(tld => {
-    tld.save((err) => {
-      if (err) throw err
-    })
-  })
+const saveItems = async (items) => {
+  await Promise.all(items.map((item) => item.save()))
 }
 
 /**
- * close mongoose connection to database
+ * Close mongoose connection
  */
-function closeConnection () {
-  setTimeout(function () {
-    console.log(`Initialized. Press Ctrl+C to to terminate batch job.`)
-    mongoose.connection.close()
-  }, 3000)
+const closeConnection = async () => {
+  await mongoose.connection.close()
+  console.log(`All done.`)
+  process.exit()
 }
+
+console.log('Initializing...')
+Promise.all([
+  dropDatabase(),
+  createDatabase(),
+  connectToDatabase(),
+  saveItems(getUsers()),
+  saveItems(getTlds())
+]).then(() => closeConnection())
