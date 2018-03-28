@@ -7,7 +7,7 @@
       append-icon="search"
       :counter="30"
       maxlength="30"
-    ></v-text-field>
+    />
     <v-data-table
       :headers="headers"
       :items="users"
@@ -21,7 +21,7 @@
     >
       <template slot="items" slot-scope="props">
         <td>
-          <v-checkbox v-model="props.selected"></v-checkbox>
+          <v-checkbox v-model="props.selected"/>
         </td>
         <td class="text-xs-left">{{props.item.username}}</td>
         <td class="text-xs-left">{{props.item.password}}</td>

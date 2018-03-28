@@ -16,7 +16,7 @@
                 v-validate="'required|max:30'"
                 data-vv-name="Username"
                 maxlength="30"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex xs12>
               <v-text-field
@@ -30,11 +30,11 @@
                 :append-icon-cb="() => showPassword = !showPassword"
                 :type="showPassword ? 'text' : 'password'"
                 :disabled="!!item._id"
-              ></v-text-field>
+              />
             </v-flex>
           </v-layout>
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <v-btn tabindex="4" color="blue darken-1" flat @click.native="cancel">Cancel</v-btn>
             <v-btn tabindex="3" :type="'submit'" color="primary">Save</v-btn>
           </v-card-actions>

@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xs>
-    <app-error v-if="appError.error" :appError="appError"></app-error>
+    <app-error v-if="appError.error" :appError="appError"/>
     <v-layout v-if="!appError.error">
       <v-flex xs12 xl8>
         <v-layout>
@@ -12,10 +12,10 @@
               v-model="text"
               v-on:input="getDomains (text)"
               clearable
-            ></v-text-field>
+            />
           </v-flex>
         </v-layout>
-        <domain-list v-if="text" :domains="domains"></domain-list>
+        <domain-list v-if="text" :domains="domains"/>
         <div class="info-container pt-5" v-else="text">
           <h2>Welcome to Domain Hack</h2>
           <h3 class="pt-3">For generating domain names, you must to input something.</h3>

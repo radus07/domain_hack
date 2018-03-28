@@ -23,7 +23,7 @@
                       data-vv-name="Username"
                       maxlength="30"
                       prepend-icon="person"
-                    ></v-text-field>
+                    />
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field
@@ -37,12 +37,12 @@
                       :append-icon-cb="() => showPassword = !showPassword"
                       :type="showPassword ? 'text' : 'password'"
                       prepend-icon="lock"
-                    ></v-text-field>
+                    />
                   </v-flex>
                 </v-layout>
                 <v-card-actions>
                   <v-btn flat :to="{name: 'web.home'}" tabindex="4">go to home page</v-btn>
-                  <v-spacer></v-spacer>
+                  <v-spacer/>
                   <v-btn :type="'submit'" color="primary" tabindex="3">sign in</v-btn>
                 </v-card-actions>
               </v-container>

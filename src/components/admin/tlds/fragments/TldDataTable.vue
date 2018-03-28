@@ -7,7 +7,7 @@
       append-icon="search"
       :counter="150"
       maxlength="150"
-    ></v-text-field>
+    />
     <v-data-table
       :headers="headers"
       :items="tlds"
@@ -21,7 +21,7 @@
     >
       <template slot="items" slot-scope="props">
         <td>
-          <v-checkbox v-model="props.selected"></v-checkbox>
+          <v-checkbox v-model="props.selected"/>
         </td>
         <td class="text-xs-left">{{props.item.tld}}</td>
         <td class="text-xs-left">{{props.item.country}}</td>

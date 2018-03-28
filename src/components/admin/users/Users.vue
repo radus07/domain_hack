@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-xs>
     <v-layout wrap>
-      <notification-snackbar :snackbar="notificationSnackbar"></notification-snackbar>
+      <notification-snackbar :snackbar="notificationSnackbar"/>
       <v-dialog v-model="userForm.show" persistent max-width="500px">
-        <component :is="userForm.component" :user-form="userForm" @cancel="userForm.show = false" @save="saveUser"></component>
+        <component :is="userForm.component" :user-form="userForm" @cancel="userForm.show = false" @save="saveUser"/>
       </v-dialog>
       <v-flex xs12 lg8>
         <v-card>
@@ -13,7 +13,7 @@
             </v-btn>
             <span class="subheading">Users</span>
           </v-card-title>
-          <v-divider></v-divider>
+          <v-divider/>
           <v-card-actions class="py-3">
             <v-btn color="primary" dark @click.stop="openUserForm(defUser)">new user</v-btn>
             <v-btn @click="fetchUsers()" v-if="!selectedUsers.length">
@@ -22,10 +22,10 @@
             <v-btn @click="deleteUsers(selectedUsers)" v-if="selectedUsers.length">
               <v-icon color="red">delete</v-icon>
             </v-btn>
-            <v-spacer></v-spacer>
+            <v-spacer/>
           </v-card-actions>
-          <v-divider></v-divider>
-          <user-data-table :users="users" @edit="openUserForm" @remove="deleteUsers" @selectedUsers="setSelectedUsers"></user-data-table>
+          <v-divider/>
+          <user-data-table :users="users" @edit="openUserForm" @remove="deleteUsers" @selectedUsers="setSelectedUsers"/>
         </v-card>
       </v-flex>
     </v-layout>

@@ -16,7 +16,7 @@
                 v-validate="'required|max:5'"
                 data-vv-name="Tld"
                 maxlength="5"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex xs12>
               <v-text-field
@@ -27,11 +27,11 @@
                 v-validate="'required|max:150'"
                 data-vv-name="Country"
                 maxlength="150"
-              ></v-text-field>
+              />
             </v-flex>
           </v-layout>
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <v-btn tabindex="4" color="blue darken-1" flat @click.native="cancel">Cancel</v-btn>
             <v-btn tabindex="3" :type="'submit'" color="primary">Save</v-btn>
           </v-card-actions>

@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-xs>
     <v-layout wrap>
-      <notification-snackbar :snackbar="notificationSnackbar"></notification-snackbar>
+      <notification-snackbar :snackbar="notificationSnackbar"/>
       <v-dialog v-model="tldForm.show" persistent max-width="500px">
-        <component :is="tldForm.component" :tld-form="tldForm" @cancel="tldForm.show = false" @save="saveTld"></component>
+        <component :is="tldForm.component" :tld-form="tldForm" @cancel="tldForm.show = false" @save="saveTld"/>
       </v-dialog>
       <v-flex xs12 lg8>
         <v-card>
@@ -13,7 +13,7 @@
             </v-btn>
             <span class="subheading">TLDS</span>
           </v-card-title>
-          <v-divider></v-divider>
+          <v-divider/>
           <v-card-actions class="py-3">
             <v-btn color="primary" dark @click.stop="openTldForm(defTld)">new tld</v-btn>
             <v-btn @click="fetchTlds()" v-if="!selectedTlds.length">
@@ -22,10 +22,10 @@
             <v-btn @click="deleteTlds(selectedTlds)" v-if="selectedTlds.length">
               <v-icon color="red">delete</v-icon>
             </v-btn>
-            <v-spacer></v-spacer>
+            <v-spacer/>
           </v-card-actions>
-          <v-divider></v-divider>
-          <tld-data-table :tlds="tlds" @edit="openTldForm" @remove="deleteTlds" @selectedTlds="setSelectedTlds"></tld-data-table>
+          <v-divider/>
+          <tld-data-table :tlds="tlds" @edit="openTldForm" @remove="deleteTlds" @selectedTlds="setSelectedTlds"/>
         </v-card>
       </v-flex>
     </v-layout>
