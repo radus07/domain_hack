@@ -83,22 +83,17 @@
       /**
        * Login the user
        */
-      submit () {
-        this.$validator.validateAll()
-          .then(() => {
-            if (this.$validator.errors.items.length === 0) {
-              authService.authenticateUser(this.user)
-                .then(token => {
-                  authService.saveToken(token)
-                    .then(() => {
-                      this.$router.push({name: 'admin.home'})
-                    })
-                })
-                .catch(() => {
-                  this.hasErrors = true
-                })
-            }
-          })
+      async submit () {
+        await this.$validator.validateAll()
+        if (this.$validator.errors.items.length === 0) {
+          try {
+            const token = await authService.authenticateUser(this.user)
+            await authService.saveToken(token)
+            this.$router.push({name: 'admin.home'})
+          } catch (err) {
+            this.hasErrors = true
+          }
+        }
       }
     }
   }

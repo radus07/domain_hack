@@ -81,11 +81,8 @@
       /**
        * Get available users from db
        */
-      fetchUsers () {
-        userService.getUsers()
-          .then(res => {
-            this.users = res
-          })
+      async fetchUsers () {
+        this.users = await userService.getUsers()
       },
       /**
        * Open the userForm component and set all details
@@ -110,37 +107,34 @@
        * Save user
        * @param user - the user for saving
        */
-      saveUser (user) {
+      async saveUser (user) {
         this.userForm.show = false
-        userService.saveUser(user)
-          .then(() => {
-            this.notificationSnackbar = {
-              show: true,
-              message: `The user '${user.username}' has been saved!`
-            }
-            this.fetchUsers()
-          })
-          .catch(() => {
-            this.notificationSnackbar = {
-              show: true,
-              message: `An error occurred. Please try again!`
-            }
-          })
+        try {
+          await userService.saveUser(user)
+          await this.fetchUsers()
+          this.notificationSnackbar = {
+            show: true,
+            message: `The user '${user.username}' has been saved!`
+          }
+        } catch (err) {
+          this.notificationSnackbar = {
+            show: true,
+            message: `An error occurred. Please try again!`
+          }
+        }
       },
       /**
        * Delete the selected users
        * @param users - the list of selected users
        */
-      deleteUsers (users) {
+      async deleteUsers (users) {
         if (confirm('Are you sure?')) {
-          userService.deleteUsers((users.length) ? users : [users])
-            .then(() => {
-              this.notificationSnackbar = {
-                show: true,
-                message: (users.length) ? `${users.length} users have been removed!` : '1 user has been removed!'
-              }
-              this.fetchUsers()
-            })
+          await userService.deleteUsers((users.length) ? users : [users])
+          await this.fetchUsers()
+          this.notificationSnackbar = {
+            show: true,
+            message: (users.length) ? `${users.length} users have been removed!` : '1 user has been removed!'
+          }
         }
       }
     },

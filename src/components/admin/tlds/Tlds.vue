@@ -81,11 +81,8 @@
       /**
        * Get available tlds from db
        */
-      fetchTlds () {
-        tldService.getTlds()
-          .then(res => {
-            this.tlds = res
-          })
+      async fetchTlds () {
+        this.tlds = await tldService.getTlds()
       },
       /**
        * Open the tldForm component and set all details
@@ -110,37 +107,34 @@
        * Save tld
        * @param tld - the tld for saving
        */
-      saveTld (tld) {
+      async saveTld (tld) {
         this.tldForm.show = false
-        tldService.saveTld(tld)
-          .then(() => {
-            this.notificationSnackbar = {
-              show: true,
-              message: `The tld '${tld.tld}' has been saved!`
-            }
-            this.fetchTlds()
-          })
-          .catch(() => {
-            this.notificationSnackbar = {
-              show: true,
-              message: `An error occurred. Please try again!`
-            }
-          })
+        try {
+          await tldService.saveTld(tld)
+          await this.fetchTlds()
+          this.notificationSnackbar = {
+            show: true,
+            message: `The tld '${tld.tld}' has been saved!`
+          }
+        } catch (err) {
+          this.notificationSnackbar = {
+            show: true,
+            message: `An error occurred. Please try again!`
+          }
+        }
       },
       /**
        * Delete the selected tlds
        * @param tlds - the list of selected tlds
        */
-      deleteTlds (tlds) {
+      async deleteTlds (tlds) {
         if (confirm('Are you sure?')) {
-          tldService.deleteTlds((tlds.length) ? tlds : [tlds])
-            .then(() => {
-              this.notificationSnackbar = {
-                show: true,
-                message: (tlds.length) ? `${tlds.length} tlds have been removed!` : '1 tld has been removed!'
-              }
-              this.fetchTlds()
-            })
+          await tldService.deleteTlds((tlds.length) ? tlds : [tlds])
+          await this.fetchTlds()
+          this.notificationSnackbar = {
+            show: true,
+            message: (tlds.length) ? `${tlds.length} tlds have been removed!` : '1 tld has been removed!'
+          }
         }
       }
     },

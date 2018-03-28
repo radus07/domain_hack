@@ -73,39 +73,31 @@
       /**
        * Check the server connection when the route contains error params
        */
-      checkServerConnection () {
+      async checkServerConnection () {
         if (this.$route.name === 'web.home' &&
           this.$route.query.error &&
           this.$route.query.error_type === 'ERR_CONNECTION_REFUSED') {
-          authService.checkConnection()
-            .then(() => {
-              this.$router.replace({name: 'web.home'})
-              this.appError.error = false
-            })
-            .catch(() => {
-              this.appError.error = true
-            })
+          try {
+            await authService.checkConnection()
+            this.$router.replace({name: 'web.home'})
+            this.appError.error = false
+          } catch (err) {
+            this.appError.error = true
+          }
         }
       },
       /**
        * Get users's details from db
        */
-      setUserDetails () {
-        authService.getUserDetails()
-          .then(user => {
-            this.user = user
-          })
+      async setUserDetails () {
+        this.user = await authService.getUserDetails()
       },
       /**
        * Get all possible domain names depends on inserted text
        */
-      getDomains (text) {
+      async getDomains (text) {
         if (text) {
-          this.text = text.replace(/[^A-Z0-9-]+/ig, '')
-          domainService.getDomains(text)
-            .then(response => {
-              this.domains = response
-            })
+          this.domains = await domainService.getDomains(text)
         }
       },
       /**

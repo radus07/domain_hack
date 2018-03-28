@@ -64,13 +64,11 @@
       /**
        * Emit the validated user for saving to parent component
        */
-      save () {
-        this.$validator.validateAll()
-          .then(() => {
-            if (this.$validator.errors.items.length === 0) {
-              this.$emit('save', this.item)
-            }
-          })
+      async save () {
+        await this.$validator.validateAll()
+        if (this.$validator.errors.items.length === 0) {
+          this.$emit('save', this.item)
+        }
       },
       /**
        * Emit the 'cancel' event to parent component
