@@ -1,21 +1,17 @@
-const DB = require('../../config/config')
-const mongoose = require('mongoose')
 const Tld = require('../../models/tld')
 
-mongoose.connect(DB.DB_URL + DB.DB_NAME)
-
 module.exports = (app) => {
-  app.post('/api/tlds', (req, res) => {
-    const newTld = new Tld({
+  app.put('/api/tlds', (req, res) => {
+    const tld = new Tld({
       country: req.body.country,
       tld: req.body.tld
     })
-    newTld.save((err) => {
+    tld.save((err) => {
       if (err) res.json({status: 403})
       else res.json({status: 201})
     })
   })
-  app.put('/api/tlds', (req, res) => {
+  app.post('/api/tlds', (req, res) => {
     const tldBody = {
       country: req.body.country,
       tld: req.body.tld

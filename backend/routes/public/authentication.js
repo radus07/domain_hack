@@ -1,12 +1,9 @@
 const CONFIG = require('../../config/config')
-const mongoose = require('mongoose')
 const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 
-mongoose.connect(CONFIG.DB_URL + CONFIG.DB_NAME)
-
 module.exports = (app) => {
-  app.post('/api/authenticate', (req, res) => {
+  app.get('/api/authenticate', (req, res) => {
     let credentials = {
       username: req.body.username,
       password: req.body.password

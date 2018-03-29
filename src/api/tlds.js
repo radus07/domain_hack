@@ -20,13 +20,13 @@ export const tldService = {
     return (tld._id) ? this.updateTld(tld) : this.insertTld(tld)
   },
   async updateTld (tld) {
-    const result = await axios.put(API_URL, tld)
+    const result = await axios.post(API_URL, tld)
     return (result.data.status === 200)
       ? Promise.resolve()
       : Promise.reject(new Error())
   },
   async insertTld (tld) {
-    const result = await axios.post(API_URL, tld)
+    const result = await axios.put(API_URL, tld)
     return (result.data.status === 201)
       ? Promise.resolve()
       : Promise.reject(new Error())

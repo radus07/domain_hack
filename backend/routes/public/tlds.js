@@ -1,8 +1,4 @@
-const DB = require('../../config/config')
-const mongoose = require('mongoose')
 const TLD = require('../../models/tld')
-
-mongoose.connect(DB.DB_URL + DB.DB_NAME)
 
 module.exports = (app) => {
   app.get('/api/tlds', (req, res) => {

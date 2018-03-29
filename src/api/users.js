@@ -20,13 +20,13 @@ export const userService = {
     return (user._id) ? this.updateUser(user) : this.insertUser(user)
   },
   async updateUser (user) {
-    const result = axios.put(API_URL, user)
+    const result = axios.post(API_URL, user)
     return (result.data.status === 200)
       ? Promise.resolve()
       : Promise.reject(new Error())
   },
   async insertUser (user) {
-    const result = axios.post(API_URL, user)
+    const result = axios.put(API_URL, user)
     return (result.data.status === 201)
       ? Promise.resolve()
       : Promise.reject(new Error())

@@ -1,8 +1,4 @@
-const DB = require('../../config/config')
-const mongoose = require('mongoose')
 const User = require('../../models/user')
-
-mongoose.connect(DB.DB_URL + DB.DB_NAME)
 
 module.exports = (app) => {
   app.get('/api/users', (req, res) => {
@@ -17,7 +13,7 @@ module.exports = (app) => {
       else res.json({status: 200})
     })
   })
-  app.post('/api/users', (req, res) => {
+  app.put('/api/users', (req, res) => {
     const user = new User({
       username: req.body.username,
       password: Buffer.from(req.body.password).toString('base64')
@@ -27,7 +23,7 @@ module.exports = (app) => {
       else res.json({status: 201})
     })
   })
-  app.put('/api/users', (req, res) => {
+  app.post('/api/users', (req, res) => {
     User.update({_id: req.body._id}, {username: req.body.username}, {upsert: true}, (err) => {
       if (err) res.json({status: 403})
       else res.json({status: 200})
