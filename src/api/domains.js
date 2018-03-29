@@ -2,28 +2,24 @@ import axios from '@/api/axios.config'
 const API_URL = '/api/tlds'
 
 export const domainService = {
-  getTlds () {
-    return axios.get(API_URL)
-      .then(result => {
-        return (result.data.status === 200)
-          ? Promise.resolve(result.data.data)
-          : Promise.reject(result.data.status)
-      })
+  async getTlds () {
+    const result = await axios.get(API_URL)
+    return (result.data.status === 200)
+      ? Promise.resolve(result.data.data)
+      : Promise.reject(result.data.status)
   },
   /**
    * Check if inserted text contains a tld code, and next generate domains depends on these tlds
    * @param text - inserted text
    * @returns {Promise}
    */
-  getDomains (text) {
-    return this.getTlds()
-      .then(items => {
-        let tlds = []
-        items.forEach(item => {
-          if (text.match(item.tld)) tlds.push(item)
-        })
-        return Promise.resolve(this.generateDomainsForCountries(text, tlds))
-      })
+  async getDomains (text) {
+    const items = await this.getTlds()
+    let tlds = []
+    items.forEach(item => {
+      if (text.match(item.tld)) tlds.push(item)
+    })
+    return Promise.resolve(this.generateDomainsForCountries(text, tlds))
   },
   /**
    * Generate all possible domains
