@@ -5,9 +5,9 @@
     <div>Created by Balan Radu</div>
   </v-footer>
 </template>
+
 <script>
   export default {
     name: 'app-footer'
   }
 </script>
-

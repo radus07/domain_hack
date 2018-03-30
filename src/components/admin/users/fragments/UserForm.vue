@@ -80,8 +80,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  form {
-    width: 100%;
-  }
+<style lang="sass" scoped>
+  form
+    width: 100%
 </style>

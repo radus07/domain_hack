@@ -122,34 +122,25 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .container {
-    height: 90%;
+<style lang="sass" scoped>
+  .container
+    height: 90%
 
-    > .layout {
-      height: 100%;
-      margin: 0 auto;
-      text-align: center;
-    }
+    > .layout
+      height: 100%
+      margin: 0 auto
+      text-align: center
 
-    .flex {
-      margin: 0 auto;
-      background-color: rgba(255, 255, 255, 0.7);
+    .flex
+      margin: 0 auto
+      background-color: rgba(255, 255, 255, 0.7)
 
-      .layout {
+      .layout
+        *
+          background: transparent
 
-        * {
-          background: transparent;
-        }
-      }
-
-      .info-container {
-        h3 {
-          button {
-            text-transform: lowercase;
-          }
-        }
-      }
-    }
-  }
+      .info-container
+        h3
+          button
+            text-transform: lowercase
 </style>

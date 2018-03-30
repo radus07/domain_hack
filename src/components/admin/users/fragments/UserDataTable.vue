@@ -111,23 +111,17 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .user-data-table {
-    .user-search {
-      position: absolute;
-      width: 30%;
-      margin-top: -74px;
-      right: 8px;
-    }
+<style lang="sass" scoped>
+  .user-data-table
+    .user-search
+      position: absolute
+      width: 30%
+      margin-top: -74px
+      right: 8px
 
-    .elevation-1 {
-      /deep/ .table__overflow {
-        table {
-          thead {
-            background-color: rgba(0, 0, 0, 0.1);
-          }
-        }
-      }
-    }
-  }
+    .elevation-1
+      /deep/ .table__overflow
+        table
+          thead
+            background-color: rgba(0, 0, 0, 0.1)
 </style>

@@ -13,7 +13,3 @@
     props: ['appError']
   }
 </script>
-
-<style scoped>
-
-</style>

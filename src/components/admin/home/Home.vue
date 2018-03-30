@@ -52,27 +52,22 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-content: center;
+<style lang="sass" scoped>
+  .container
+    height: 100%
+    width: 100%
+    display: flex
+    align-content: center
 
-    div {
-      width: 100%;
-      margin: auto 0;
+    div
+      width: 100%
+      margin: auto 0
 
-      .layout {
-        .flex {
-          text-align: center;
-          li {
-            width: 150px;
-            margin: 0 auto;
-            list-style: none;
-          }
-        }
-      }
-    }
-  }
+      .layout
+        .flex
+          text-align: center
+          li
+            width: 150px
+            margin: 0 auto
+            list-style: none
 </style>

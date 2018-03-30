@@ -26,35 +26,29 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .domain-list {
-    height: calc(100% - 76px);
-    position: relative;
-    float: left;
-    width: 100%;
+<style lang="sass" scoped>
+  .domain-list
+    height: calc(100% - 76px)
+    position: relative
+    float: left
+    width: 100%
 
-    .domain-items {
-      position: absolute;
-      overflow: hidden;
-      height: calc(100% - 40px);
-      width: 100%;
-      overflow-y: auto;
+    .domain-items
+      position: absolute
+      overflow: hidden
+      height: calc(100% - 40px)
+      width: 100%
+      overflow-y: auto
 
-      .layout {
-        border-bottom: 1px solid rgba(0, 0, 0, .12);
+      .layout
+        border-bottom: 1px solid rgba(0, 0, 0, .12)
 
-        > div {
-          word-wrap: break-word;
+        > div
+          word-wrap: break-word
 
-          span:nth-child(2) {
-            color: rgb(0, 10, 163);
-          }
+          span:nth-child(2)
+            color: rgb(0, 10, 163)
 
-          span:nth-child(3) {
-            font-style: italic;
-          }
-        }
-      }
-    }
-  }
+          span:nth-child(3)
+            font-style: italic
 </style>

@@ -145,8 +145,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .flex {
-    margin: 0 auto;
-  }
+<style lang="sass" scoped>
+  .flex
+    margin: 0 auto
 </style>
