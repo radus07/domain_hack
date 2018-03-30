@@ -3,10 +3,10 @@ const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 
 module.exports = (app) => {
-  app.get('/api/authenticate', (req, res) => {
+  app.get('/api/authenticate/:username/:password', (req, res) => {
     let credentials = {
-      username: req.body.username,
-      password: req.body.password
+      username: req.params.username,
+      password: req.params.password
     }
     credentials = validateCredentials(credentials)
     User.findOne({

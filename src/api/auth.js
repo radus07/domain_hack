@@ -3,7 +3,7 @@ import axios from '@/api/axios.config'
 export const authService = {
   async authenticateUser (user) {
     user = this.validateUser(user)
-    const result = await axios.get(`/api/authenticate`, user)
+    const result = await axios.get(`/api/authenticate/${user.username}/${user.password}`)
     return (result.data.status === 200)
       ? Promise.resolve(result.data.data)
       : Promise.reject(result.data.status)
