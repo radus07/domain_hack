@@ -20,9 +20,9 @@
           <h2>Welcome to Domain Hack</h2>
           <h3 class="pt-3">For generating domain names, you must to input something.</h3>
           <h3 class="pt-3">For example:
-            <v-btn flat @click="getDomains('marcus')">marcus</v-btn>
-            <v-btn flat @click="getDomains('arialius')">arialius</v-btn>
-            <v-btn flat @click="getDomains('mucuses')">mucuses</v-btn>.
+            <v-btn flat @click="text = 'marcus'; getDomains()">marcus</v-btn>
+            <v-btn flat @click="text = 'arialius'; getDomains()">arialius</v-btn>
+            <v-btn flat @click="text = 'mucuses'; getDomains()">mucuses</v-btn>.
           </h3>
           <v-btn v-if="!user.auth" class="mt-5" style="width: 200px;" round :to="{name: 'web.sign_in'}">sign in</v-btn>
           <v-btn v-if="user.auth" class="mt-5" round :to="{name: 'admin.home'}">admin page</v-btn>
@@ -95,9 +95,10 @@
       /**
        * Get all possible domain names depends on inserted text
        */
-      async getDomains (text) {
+      async getDomains (text = this.text) {
         if (text) {
-          this.domains = await domainService.getDomains(text)
+          this.text = text.replace(/[^A-Z0-9-]+/ig, '')
+          this.domains = await domainService.getDomains(this.text)
         }
       },
       /**
