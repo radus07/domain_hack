@@ -104,10 +104,8 @@
   .layout
     .login-error
       margin-top: -63px
-
     .card
       background-color: rgba(255, 255, 255, 0.7)
-
       form
         width: 100%
 </style>

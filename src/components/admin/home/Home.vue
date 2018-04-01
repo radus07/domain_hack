@@ -59,11 +59,9 @@
     width: 100%
     display: flex
     align-content: center
-
     div
       width: 100%
       margin: auto 0
-
       .layout
         .flex
           text-align: center

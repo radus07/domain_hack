@@ -125,20 +125,16 @@
 <style lang="sass" scoped>
   .container
     height: 90%
-
     > .layout
       height: 100%
       margin: 0 auto
       text-align: center
-
     .flex
       margin: 0 auto
       background-color: rgba(255, 255, 255, 0.7)
-
       .layout
         *
           background: transparent
-
       .info-container
         h3
           button

@@ -118,7 +118,6 @@
       width: 30%
       margin-top: -74px
       right: 8px
-
     .elevation-1
       /deep/ .table__overflow
         table

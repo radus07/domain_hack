@@ -19,7 +19,6 @@ export default {
     min-height: 500px
     background: url("../../static/img/backgroud.jpg") center
     background-size: cover
-
     > div
       height: 100%
       background-color: rgba(0, 0, 0, 0.56)
