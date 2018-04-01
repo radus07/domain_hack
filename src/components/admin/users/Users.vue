@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import {userService} from '@/api/users'
+  import {UserService} from '@/common/api.service'
   import NotificationSnackbar from '../common/NotificationSnackbar'
   import UserDataTable from './fragments/UserDataTable'
 
@@ -82,7 +82,7 @@
        * Get available users from db
        */
       async fetchUsers () {
-        this.users = await userService.getUsers()
+        this.users = await UserService.getAll()
       },
       /**
        * Open the userForm component and set all details
@@ -110,13 +110,14 @@
       async saveUser (user) {
         this.userForm.show = false
         try {
-          await userService.saveUser(user)
+          await UserService.add(user)
           await this.fetchUsers()
           this.notificationSnackbar = {
             show: true,
             message: `The user '${user.username}' has been saved!`
           }
         } catch (err) {
+          console.log(err)
           this.notificationSnackbar = {
             show: true,
             message: `An error occurred. Please try again!`
@@ -129,7 +130,7 @@
        */
       async deleteUsers (users) {
         if (confirm('Are you sure?')) {
-          await userService.deleteUsers((users.length) ? users : [users])
+          await UserService.remove((users.length) ? users : [users])
           await this.fetchUsers()
           this.notificationSnackbar = {
             show: true,

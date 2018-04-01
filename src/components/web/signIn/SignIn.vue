@@ -55,7 +55,8 @@
 </template>
 
 <script>
-  import {authService} from '@/api/auth'
+  import {UserService, AuthService} from '@/common/api.service'
+
   export default {
     name: 'sign-in',
     data () {
@@ -87,8 +88,8 @@
         await this.$validator.validateAll()
         if (this.$validator.errors.items.length === 0) {
           try {
-            const token = await authService.authenticateUser(this.user)
-            await authService.saveToken(token)
+            const token = await UserService.authenticate(this.user)
+            await AuthService.saveToken(token)
             this.$router.push({name: 'admin.home'})
           } catch (err) {
             this.hasErrors = true

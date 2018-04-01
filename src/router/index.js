@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import {webRoutes} from './web-router'
 import {adminRoutes} from './admin-router'
-import {authService} from '@/api/auth'
+import {UserService} from '@/common/api.service'
 
 const appRoutes = webRoutes.concat(adminRoutes)
 
@@ -31,7 +31,7 @@ const doGuard = async (to, from, next) => {
       to.query.error_type === 'ERR_CONNECTION_REFUSED') {
     next()
   } else {
-    const user = await authService.getUserDetails()
+    const user = await UserService.getDetails()
     if (to.meta.authenticated === undefined) next()
     else if (to.meta.authenticated) {
       if (user.auth) next()

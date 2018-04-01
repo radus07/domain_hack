@@ -38,7 +38,8 @@
 </template>
 
 <script>
-  import {authService} from '@/api/auth'
+  import {AuthService} from '@/common/api.service'
+
   export default {
     name: 'home',
     methods: {
@@ -46,7 +47,7 @@
        * Logout the logged user
        */
       logout () {
-        authService.logoutUser(this.$router)
+        AuthService.destroyToken(this.$router)
       }
     }
   }

@@ -34,8 +34,7 @@
 </template>
 
 <script>
-  import {domainService} from '@/api/domains'
-  import {authService} from '@/api/auth'
+  import {DomainService, AuthService, UserService} from '@/common/api.service'
   import AppError from '@/components/common/AppError'
   import DomainList from './fragments/DomainList'
 
@@ -78,7 +77,7 @@
           this.$route.query.error &&
           this.$route.query.error_type === 'ERR_CONNECTION_REFUSED') {
           try {
-            await authService.checkConnection()
+            await AuthService.checkConnection()
             this.$router.replace({name: 'web.home'})
             this.appError.error = false
           } catch (err) {
@@ -90,7 +89,7 @@
        * Get users's details from db
        */
       async setUserDetails () {
-        this.user = await authService.getUserDetails()
+        this.user = await UserService.getDetails()
       },
       /**
        * Get all possible domain names depends on inserted text
@@ -98,14 +97,14 @@
       async getDomains (text = this.text) {
         if (text) {
           this.text = text.replace(/[^A-Z0-9-]+/ig, '')
-          this.domains = await domainService.getDomains(this.text)
+          this.domains = await DomainService.getAll(this.text)
         }
       },
       /**
        * Logout the logged user
        */
       logout () {
-        authService.logoutUser(this.$router)
+        AuthService.destroyToken(this.$router)
       }
     },
     watch: {

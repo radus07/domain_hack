@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import {tldService} from '@/api/tlds'
+  import {TldService} from '@/common/api.service'
   import NotificationSnackbar from '../common/NotificationSnackbar'
   import TldDataTable from './fragments/TldDataTable'
 
@@ -82,7 +82,7 @@
        * Get available tlds from db
        */
       async fetchTlds () {
-        this.tlds = await tldService.getTlds()
+        this.tlds = await TldService.getAll()
       },
       /**
        * Open the tldForm component and set all details
@@ -110,7 +110,7 @@
       async saveTld (tld) {
         this.tldForm.show = false
         try {
-          await tldService.saveTld(tld)
+          await TldService.add(tld)
           await this.fetchTlds()
           this.notificationSnackbar = {
             show: true,
@@ -129,7 +129,7 @@
        */
       async deleteTlds (tlds) {
         if (confirm('Are you sure?')) {
-          await tldService.deleteTlds((tlds.length) ? tlds : [tlds])
+          await TldService.remove((tlds.length) ? tlds : [tlds])
           await this.fetchTlds()
           this.notificationSnackbar = {
             show: true,
