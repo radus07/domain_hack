@@ -5,6 +5,9 @@ module.exports = (app) => {
   /**
    * Public routes
    */
+  app.get('/api', (req, res) => {
+    res.sendStatus(200)
+  })
   require('./public')(app)
 
   app.use((req, res, next) => {
