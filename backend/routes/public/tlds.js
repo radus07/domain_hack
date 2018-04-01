@@ -1,4 +1,5 @@
-const TLD = require('../../models/tld')
+const mongoose = require('mongoose')
+const TLD = mongoose.model('TLD')
 
 module.exports = (app) => {
   app.get('/api/tlds', (req, res) => {

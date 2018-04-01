@@ -1,32 +1,23 @@
-const Tld = require('../../models/tld')
+const mongoose = require('mongoose')
+const TLD = mongoose.model('TLD')
 
 module.exports = (app) => {
-  app.put('/api/tlds', (req, res) => {
-    const tld = new Tld({
-      country: req.body.country,
-      tld: req.body.tld
-    })
-    tld.save((err) => {
-      if (err) res.json({status: 403})
-      else res.json({status: 201})
-    })
-  })
   app.post('/api/tlds', (req, res) => {
-    const tldBody = {
-      country: req.body.country,
-      tld: req.body.tld
-    }
-    Tld.update({_id: req.body._id}, tldBody, {upsert: true}, (err) => {
-      if (err) res.json({status: 403})
-      else res.json({status: 200})
-    })
-  })
-  app.delete('/api/tlds', (req, res) => {
-    req.body.tlds.forEach(tld => {
-      Tld.findByIdAndRemove(tld._id, (err) => {
+    const tld = req.body.tld
+    if (tld._id) {
+      TLD.findOneAndUpdate({_id: tld._id}, tld, (err) => {
         if (err) res.json({status: 403})
+        else res.json({status: 200})
       })
-    })
+    } else {
+      new TLD(tld).save((err) => {
+        if (err) res.json({status: 403})
+        else res.json({status: 200})
+      })
+    }
+  })
+  app.delete('/api/tlds', async (req, res) => {
+    await Promise.all(req.body.tlds.map(tld => TLD.findOneAndRemove({_id: tld._id})))
     res.json({status: 200})
   })
 }

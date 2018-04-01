@@ -1,4 +1,5 @@
-const User = require('../../models/user')
+const mongoose = require('mongoose')
+const User = mongoose.model('User')
 
 module.exports = (app) => {
   app.get('/api/users', (req, res) => {
@@ -10,31 +11,25 @@ module.exports = (app) => {
   app.get('/api/users/:id', (req, res) => {
     User.findOne({_id: req.params.id}, (err, result) => {
       if (err || !result) res.json({status: 404})
-      else res.json({status: 200})
-    })
-  })
-  app.put('/api/users', (req, res) => {
-    const user = new User({
-      username: req.body.username,
-      password: Buffer.from(req.body.password).toString('base64')
-    })
-    user.save((err) => {
-      if (err) res.json({status: 403})
-      else res.json({status: 201})
+      else res.json({status: 200, data: result})
     })
   })
   app.post('/api/users', (req, res) => {
-    User.update({_id: req.body._id}, {username: req.body.username}, {upsert: true}, (err) => {
-      if (err) res.json({status: 403})
-      else res.json({status: 200})
-    })
-  })
-  app.delete('/api/users', (req, res) => {
-    req.body.users.forEach(user => {
-      User.findByIdAndRemove(user._id, (err) => {
+    const user = req.body.user
+    if (user._id) {
+      User.findOneAndUpdate({_id: user._id}, user, (err) => {
         if (err) res.json({status: 403})
+        else res.json({status: 200})
       })
-    })
+    } else {
+      new User(user).save((err) => {
+        if (err) res.json({status: 403})
+        else res.json({status: 200})
+      })
+    }
+  })
+  app.delete('/api/users', async (req, res) => {
+    await Promise.all(req.body.users.map(user => User.findOneAndRemove({_id: user._id})))
     res.json({status: 200})
   })
 }
