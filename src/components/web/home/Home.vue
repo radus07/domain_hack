@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import {DomainService, AuthService, UserService} from '@/common/api.service'
+  import {DomainService, AuthService, UserService, ApiService} from '@/common/api.service'
   import AppError from '@/components/common/AppError'
   import DomainList from './fragments/DomainList'
 
@@ -77,7 +77,7 @@
           this.$route.query.error &&
           this.$route.query.error_type === 'ERR_CONNECTION_REFUSED') {
           try {
-            await AuthService.checkConnection()
+            await ApiService.checkConnection()
             this.$router.replace({name: 'web.home'})
             this.appError.error = false
           } catch (err) {

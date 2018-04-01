@@ -11,10 +11,5 @@ export const AuthService = {
   destroyToken (router) {
     localStorage.removeItem('token')
     router.push({name: 'web.sign_in'})
-  },
-  async checkConnection () {
-    const result = await ApiService.get('')
-    console.log(result)
-    return result ? Promise.resolve() : Promise.reject(new Error())
   }
 }

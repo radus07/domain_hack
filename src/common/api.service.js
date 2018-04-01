@@ -39,6 +39,10 @@ const ApiService = {
   },
   delete (resource, body) {
     return axios.delete(resource, body)
+  },
+  async checkConnection () {
+    const result = await ApiService.get('')
+    return result ? Promise.resolve() : Promise.reject(new Error())
   }
 }
 
