@@ -1,5 +1,3 @@
-import {ApiService} from '@/common/api.service'
-
 export const AuthService = {
   saveToken (token) {
     localStorage.setItem('token', JSON.stringify(token))
