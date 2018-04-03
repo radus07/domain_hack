@@ -1,7 +1,7 @@
-import Admin from '@/views/Admin'
-import Home from '@/components/admin/home/Home'
-import Users from '@/components/admin/users/Users'
-import Tlds from '@/components/admin/tlds/Tlds'
+const Admin = () => import('@/views/Admin')
+const Home = () => import('@/components/admin/home/Home')
+const Users = () => import('@/components/admin/users/Users')
+const Tlds = () => import('@/components/admin/tlds/Tlds')
 
 const adminRoutes = [
   {

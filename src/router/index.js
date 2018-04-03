@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import {webRoutes} from './web-router'
-import {adminRoutes} from './admin-router'
+import {webRoutes} from './web-routes'
+import {adminRoutes} from './admin-routes'
 import {UserService} from '@/common/api.service'
 
 const appRoutes = webRoutes.concat(adminRoutes)

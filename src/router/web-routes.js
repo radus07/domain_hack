@@ -1,7 +1,7 @@
 import Web from '@/views/Web'
 import Home from '@/components/web/home/Home'
-import SignIn from '@/components/web/signIn/SignIn'
-import AppError from '@/components/common/AppError'
+const SignIn = () => import('@/components/web/signIn/SignIn')
+const AppError = () => import('@/components/common/AppError')
 
 const webRoutes = [
   {
